@@ -1,9 +1,45 @@
-/*-------------------------------- Constants --------------------------------*/
+\const calculator = document.querySelector("#calculator");
+const display = document.querySelector(".display");
 
-/*-------------------------------- Variables --------------------------------*/
+let num1 = "";
+let num2 = "";
+let operator = "";
 
-/*------------------------ Cached Element References ------------------------*/
+calculator.addEventListener("click", (e) => {
+  const currentElement = e.target;
 
-/*----------------------------- Event Listeners -----------------------------*/
+  if (currentElement.classList.contains("number")) {
+    if (operator === "") {
+      num1 += currentElement.innerText;
+      display.innerText = num1;
+    } else {
+      num2 += currentElement.innerText;
+      display.innerText = num2;
+    }
+  }
 
-/*-------------------------------- Functions --------------------------------*/
+  if (currentElement.classList.contains("operator")) {
+    if (operator === "") {
+      operator = currentElement.innerText;
+    }
+
+    if (currentElement.innerText === "C") {
+      num1 = "";
+      num2 = "";
+      operator = "";
+      display.innerText = "";
+    }
+  }
+
+  if (currentElement.classList.contains("equals")) {
+    if (operator === "*") {
+      display.innerText = parseInt(num1) * parseInt(num2);
+    } else if (operator === "/") {
+      display.innerText = parseInt(num1) / parseInt(num2);
+    } else if (operator === "-") {
+      display.innerText = parseInt(num1) - parseInt(num2);
+    } else {
+      display.innerText = parseInt(num1) + parseInt(num2);
+    }
+  }
+});
